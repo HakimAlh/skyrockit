@@ -44,7 +44,8 @@ app.use(passUserToView)
 //CONTROLLERS
 const pagesCtrl = require('./controllers/pages')
 const authCtrl = require('./controllers/auth')
-const vipCtrl = require('./controllers/vip')
+// const vipCtrl = require('./controllers/vip')
+const applicationsCtrl = require('./controllers/applications')
 
 
 //ROUTE HANDLERS
@@ -54,7 +55,15 @@ app.post('/auth/sign-up', authCtrl.addUser)
 app.get('/auth/sign-in', authCtrl.signInForm)
 app.post('/auth/sign-in', authCtrl.signIn)
 app.get('/auth/sign-out', authCtrl.signOut)
-app.get('/vip-lounge', isSignedIn, vipCtrl.welcome)
+
+
+app.use(isSignedIn) // <---- Thanks to this anything under here, user must be signed in
+
+// 67a1c060fff9c0dd11e4d5ad
+app.get('/users/:userId/applications/new', applicationsCtrl.newApplication) // view new application form
+app.post('/users/:userId/applications', applicationsCtrl.createApplication) // posting new application to the database
+app.get('/users/:userId/applications', applicationsCtrl.index) // view all the applications
+// app.get('/vip-lounge', isSignedIn, vipCtrl.welcome)
 
 app.listen(port, () => {
     console.log(`The express app is ready on port ${port}`)

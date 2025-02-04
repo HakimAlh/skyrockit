@@ -1,0 +1,27 @@
+<%- include('../partials/head')%>
+<div class="container">
+
+        <h1>Add a New Application</h1>
+        <form action="/users/<%= user._id %>/applications" method="POST">
+                <label for="">Company:</label>
+                <input type="text" name="company">
+                <label for="">Title:</label>
+                <input type="text" name="title">
+                <label for="">Notes:</label>
+                <textarea name="notes" id=""></textarea>
+                <label for="">Posting Link:</label>
+                <input type="text" name="postingLink">
+                <label for="">Status:</label>
+                <select name="status" id="">
+                <option value="" selected disabled></option>
+                 <option value="interested">Interested</option>
+                 <option value="applied">Applied</option>
+                 <option value="interviewing">Interviewing</option>
+                 <option value="rejected">Rejected</option>
+                 <option value="accepted">Accepted</option>       
+                </select>
+                <button type="submit" class="btn btn-primary">Add Application</button>
+        </form>
+
+</div>
+<%- include('../partials/footer')%>
